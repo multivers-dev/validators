@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Validators</h1>
+  <form [formGroup]="formGroup">
+    <pre>{{formGroup.errors | json }} </pre>
+    <input type="text" placeholder="firstname" formControlName="firstName">
+    <pre>{{firstName.errors | json }}</pre>
+    <input type="text" placeholder="lastname" formControlName="lastName">
+    <input type="password" placeholder="password" formControlName="password">
+  </form>
+  
+</div>

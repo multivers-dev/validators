@@ -1,0 +1,16 @@
+div.container{
+    display: flex;
+    flex-flow: wrap;
+    background-color: gray;
+    .section{
+        display: flex;
+        flex-flow: wrap;
+        background-color: gray;
+    }
+}
+div.flag{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    text-align: center;
+}
