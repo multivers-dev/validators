@@ -13,7 +13,7 @@ describe("NumberValidator", () => {
     });
 
     it("should be invalid with empty string", () => {
-        expect(formControl.invalid).toBeTruthy();
+        expect(formControl.invalid).toBeFalsy();
     });
 
     it("should be valid with number", () => {

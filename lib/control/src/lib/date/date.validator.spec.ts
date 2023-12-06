@@ -21,6 +21,11 @@ describe('dateValidator', () => {
         expect(formControl.invalid).toBeTruthy();
     });
 
+    it("should be invalid with number", () => {
+        formControl.setValue(null)
+        expect(formControl.invalid).toBeTruthy();
+    });
+
     it("should be valid with date", () => {
         formControl.setValue(new Date())
         expect(formControl.invalid).toBeFalsy();

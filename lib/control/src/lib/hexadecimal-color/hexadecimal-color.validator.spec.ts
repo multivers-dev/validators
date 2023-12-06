@@ -30,8 +30,16 @@ describe('notContainsValidator', () => {
     expect(color.invalid).toBeFalsy();
   });
 
+  it("color formControl should be valid if validator have withHash paremeter off", () => {
+
+    color.setValidators(MultiversControlValidators.hexadecimalColor(false))
+    color.setValue("1AFFa1")
+    expect(color.invalid).toBeFalsy();
+  });
 
 
-
-
+    it("color formControl should be invalid if validator have withHash paremeter on", () => {
+        color.setValue("1AFFa1")
+        expect(color.invalid).toBeTruthy();
+    });
 });

@@ -39,7 +39,6 @@ Below is a list of custom validators included in this library.
 
 | Validator     | Description                                                                                                                                                              |
 |---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `conditional` | the `conditional` validates a control based on a condition                                                                                                               |                                                                                                                                                               |
 | `credit-card` | The `credit-card` validator checks if the input is a valid credit card number. It uses the Luhn algorithm to validate the number.                                        |
 | `date`        | The `date` validator checks if the input is a valid date. It supports both ISO 8601 and non-ISO 8601 formats.                                                            |
 | `decimal`     | The `decimal` validator checks if the input is a valid decimal number. It allows both integer and fractional numbers.                                                    |

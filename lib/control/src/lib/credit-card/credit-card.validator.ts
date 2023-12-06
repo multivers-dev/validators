@@ -10,6 +10,9 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
 export const creditCardValidator = (control: AbstractControl): ValidationErrors | null => {
     // Implement logic to validate credit card number
     const value = control.value;
+    if (!value) {
+        return null;
+    }
     const LuhnCheck = (function () {
         const luhnArr = [0, 2, 4, 6, 8, 1, 3, 5, 7, 9];
         return function (str: string) {

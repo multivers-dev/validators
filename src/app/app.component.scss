@@ -1,6 +1,7 @@
 div.container{
     display: flex;
     flex-flow: wrap;
+    flex-direction: column;
     background-color: gray;
     .section{
         display: flex;
@@ -14,3 +15,4 @@ div.flag{
     margin: 5px;
     text-align: center;
 }
+

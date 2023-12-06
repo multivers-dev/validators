@@ -40,28 +40,40 @@ describe('creditCardValidator', () => {
     });
 
     it("should be invalid with empty string", () => {
-        expect(formControl.invalid).toBeTruthy();
+        expect(formControl.invalid).toBeFalsy()
+        expect(formControl.errors).toEqual(null);
     });
+
+    it("should be invalid with null", () => {
+        formControl.setValue(null)
+        expect(formControl.invalid).toBeFalsy()
+        expect(formControl.errors).toEqual(null);
+    });
+
 
     it("should be invalid with string", () => {
         formControl.setValue("test")
         expect(formControl.invalid).toBeTruthy();
+        expect(formControl.errors).toEqual({ creditCard: true });
     });
 
     it("should be invalid with number", () => {
         invalidCreditCards.forEach( (card: string | null) => {
             formControl.setValue(card)
             expect(formControl.invalid).toBeTruthy();
+            expect(formControl.errors).toEqual({ creditCard: true });
         })
     });
 
     it("should be valid with number", () => {
         validCreditCards.forEach( (card: string | null) => {
             formControl.setValue(card)
-            if (formControl.invalid) {
-                console.log(card, formControl.errors)
-            }
             expect(formControl.invalid).toBeFalsy();
+            expect(formControl.errors).toEqual(null);
         })
+    });
+
+    it('should has not hex', () => {
+        
     });
 });

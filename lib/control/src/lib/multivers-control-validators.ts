@@ -2,7 +2,6 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { lowerCaseValidator } from "./lowercase/lowercase.validator";
 import { upperCaseValidator } from "./uppercase/uppercase.validator";
 import { hexadecimalColorValidator } from "./hexadecimal-color/hexadecimal-color.validator";
-import {conditionalValidator} from "./conditional/conditional.validator";
 import {dateValidator} from "./date/date.validator";
 import {decimalValidator} from "./decimal/decimal.validator";
 import {equalValidator} from "./equal/equal.validator";
@@ -31,10 +30,6 @@ export class MultiversControlValidators{
 
       static date(control: AbstractControl): ValidationErrors|null {
         return dateValidator(control);
-      }
-
-      static conditional(condition: () => boolean, validator: ValidatorFn): ValidatorFn {
-        return conditionalValidator(condition, validator);
       }
 
       static creditCard(control: AbstractControl): ValidationErrors|null {
@@ -77,7 +72,7 @@ export class MultiversControlValidators{
         return rangeValidator(min, max);
       }
 
-     static unique(values : any[]): ValidationErrors | null {
+     static unique(values : any): ValidationErrors | null {
         return uniqueValidator(values)
       }
 

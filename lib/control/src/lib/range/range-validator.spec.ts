@@ -1,11 +1,12 @@
 import {MultiversControlValidators} from "../multivers-control-validators";
 import {FormControl} from "@angular/forms";
+import {rangeValidator} from "./range-validator";
 
 describe('rangeValidator', () => {
     let formControl: FormControl;
 
     beforeEach(() => {
-        formControl = new FormControl('', [MultiversControlValidators.range(1, 10)]);
+        formControl = new FormControl('', [rangeValidator(1, 10)]);
     });
     it('should be invalid with number', () => {
         formControl.setValue(11);

@@ -13,9 +13,6 @@ export const ipv4Validator = (control: AbstractControl): ValidationErrors | null
     if (!value) {
         return null;
     }
-    if (typeof value !== 'string') {
-        return { ipv4: true };
-    }
 
     let parts = value.split('.');
 
