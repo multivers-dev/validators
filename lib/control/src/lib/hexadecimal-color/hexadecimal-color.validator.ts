@@ -7,7 +7,8 @@ It should start from ‘#’ symbol. ( withHash boolean )
 It should be followed by the letters from a-f, A-F and/or digits from 0-9.
 The length of the hexadecimal color code should be either 6 or 3, excluding ‘#’ symbol.
  * hexadecimalColorValidator
- * @returns
+ * @param withHash - The condition to evaluate.
+ *  @returns ValidationErrors or null if the validation passes.
  */
 export const hexadecimalColorValidator = (withHash = true): ValidatorFn => {
   return (control: AbstractControl) => {
