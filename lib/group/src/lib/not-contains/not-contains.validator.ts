@@ -44,7 +44,6 @@ export const notContainsValidator = (
       return null;
     }
     const toValidateControl = group.get(toValidateField) as FormControl<string>;
-
     if (!toValidateControl || toValidateControl.invalid) {
       return null;
     }
@@ -72,13 +71,9 @@ export const notContainsValidator = (
           toValidateControl.value.includes(value)
       )
       .map(({ field }) => field);
-
+    const error = { notContains:  `${toValidateField} must not contains ${foundFields.join(', ')}` };
     return foundFields.length > 0
-      ? {
-          notcontains: `${toValidateField} must not contains ${foundFields.join(
-            ' and/or '
-          )}`,
-        }
+      ?  error
       : null;
   };
 };

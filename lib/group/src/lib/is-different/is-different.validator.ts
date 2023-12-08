@@ -2,34 +2,40 @@ import { AbstractControl, ValidationErrors, FormGroup, FormControl } from '@angu
 
 /**
  * @description
- * Validator for FormGroup that checks if the fiels have different value.
+ * Validator for FormGroup that checks if the fiels are different.
  *
+ * @usageNotes
+ * ### Validate that two fields are equal
+ * ```typescript
+ * const formGroup = new FormGroup({
+ *   password: new FormControl('123456'),
+ *   confirmPassword: new FormControl('123456'),
+ *   }, [isDifferentValidator('password', 'confirmPassword')]);
+ *   console.log(formGroup.errors); // { different: true }
+ *   ```
  *
- * @returns A validator function that returns an error with the `different` property if the validation check fails, otherwise `null`.
- * @param fiels - The list of fields to compare.
+ * @returns A validator function that returns an error with the `different` property if the validation is not equal, otherwise `null`.
+ * @param firstField - The name of the first field.
+ * @param secondField - The name of the second field.
  */
-export const isDifferentValidator = (fiels: string[]) => (group: AbstractControl): ValidationErrors | null => {
+export const isDifferentValidator = (firstField: string, secondField: string) => (group: AbstractControl): ValidationErrors | null => {
     if (!(group instanceof FormGroup)) {
-        console.warn('[differentValidator] should be used as FormGroup Validator');
+        console.warn('[equalValidator] should be used as FormGroup Validator');
         return null;
     }
 
-   for (let i = 0; i < fiels.length; i++) {
-      const field = group.get(fiels[i]) as FormControl<any>;
-      if (!field || field.invalid) {
-         return null;
-      }
-      const fieldValue = field.value;
-      for (let j = i + 1; j < fiels.length; j++) {
-         const fieldToCompare = group.get(fiels[j]) as FormControl<any>;
-         if (!fieldToCompare || fieldToCompare.invalid) {
-            return null;
-         }
-         const fieldToCompareValue = fieldToCompare.value;
-         if (fieldValue === fieldToCompareValue) {
-            return { different: true };
-         }
-      }
-   }
-    return null;
+    const first = group.get(firstField) as FormControl<any>;
+    const second = group.get(secondField) as FormControl<any>;
+
+    if (!first || !second  || first.invalid || second.invalid ) {
+        return null;
+    }
+
+
+    const firstValue = first.value;
+    const secondValue = second.value;
+    if (firstValue !== secondValue) {
+        return null;
+    }
+    return { different: true };
 };

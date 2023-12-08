@@ -29,11 +29,12 @@ describe('notContainsValidator', () => {
   });
 
   it("['firstName','lastName'] validation form should be invalid and errors on notContains  ", () => {
+    console.log(form.errors, form.invalid)
     form.addValidators(notContainsValidator('password', ['firstName','lastName']))
-    form.updateValueAndValidity()
+    form.updateValueAndValidity();
+    console.log(form.errors, form.invalid);
     expect(form.invalid).toBeTruthy();
     expect(form.hasError('notContains')).toBeTruthy();
-
   });
 
   it(" ['lastName'] validation form should be invalid and errors on notContains ", () => {
