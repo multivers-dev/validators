@@ -10,27 +10,21 @@ This library contains custom validators for Angular Reactive Forms.
 
 ## Usage
 
-To use this library, install it via npm:
-
-```bash
-npm install multivers-validators
-```
-
-Then import the `MultiversControlValidator` module into your Angular module:
+Import the `MultiversControlValidator` module into your Angular module:
 
 ```typescript
 import { MultiversControlValidator } from 'multivers-validators';
 ```
 
-Finally, add the `MultiversControlValidator` module to the `imports` array of your Angular module:
+Then, add the validators to your form controls:
 
 ```typescript
-@NgModule({
-  imports: [
-    MultiversControlValidator
-  ]
-})
-export class AppModule { }
+formGroup = new FormGroup({
+  firstField: new FormControl('', [someValidatorOfThisLibrary, anotherValidatorOfThisLibrary, ...]),
+  secondField: new FormControl('', [someValidatorOfThisLibrary, anotherValidatorOfThisLibrary, ...]),
+  thirdField: new FormControl('', [someValidatorOfThisLibrary, anotherValidatorOfThisLibrary, ...]),
+  fourthField: new FormControl('', [someValidatorOfThisLibrary, anotherValidatorOfThisLibrary, ...]),
+});
 ```
 
 ## Validators
@@ -54,5 +48,3 @@ Below is a list of custom validators included in this library.
 | `unique`      | The `unique` validator checks if the input is unique within a specified array or set of values. It is useful for checking if a username or email is already taken.       |
 | `uppercase`   | The `uppercase` validator checks if the input is a string that contains only uppercase letters.                                                                          |
 | `url`         | The `url` validator checks if the input is a valid URL. It supports both http and https protocols.                                                                       |
-
-s
