@@ -2,7 +2,7 @@ import { AbstractControl, ValidationErrors, FormGroup, FormControl } from '@angu
 
 /**
  * @description
- * Validator for FormGroup that checks if one of the two fields is required.
+ * Validator for FormGroup that checks if one of the two fields is required. It takes the name of the two fields as parameters.
  *
  * @usageNotes
  * ### Validate that one of the two fields is required
