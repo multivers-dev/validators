@@ -25,8 +25,8 @@ export const requiredSomeValidator = (fieldList : string[], numberRequired:numbe
         return null;
     }
 
-    const fields = fieldList.map(field => group.get(field) as FormControl<any>);
-    const invalidFields = fields.filter(field => !field || field.invalid);
+    const fields = fieldList.map(field => group.controls[field] as FormControl<any>);
+    const invalidFields = fields.filter(field => !field);
     if (invalidFields.length > 0) {
         console.warn('[requiredSomeValidator] should be used with valid fields');
         return null;
@@ -49,6 +49,7 @@ export const requiredSomeValidator = (fieldList : string[], numberRequired:numbe
     if (hasValue.length >= numberRequired) {
         return null;
     }
-    return { required: true };
+    //set error on all fields
+    return { required: true, fields: fieldList, numberRequired: numberRequired };
 
 };

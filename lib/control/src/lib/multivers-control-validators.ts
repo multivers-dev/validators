@@ -28,9 +28,10 @@ import {phoneNumberValidator} from "./phone-number/phone-nomber.validation";
  */
 export class MultiversControlValidators{ 
 
-      static date(control: AbstractControl): ValidationErrors|null {
-        return dateValidator(control);
+      static  date=(min:Date|null=null, max:Date|null=null) =>(control: AbstractControl): ValidationErrors|null => {
+        return dateValidator(min,max)(control);
       }
+
 
       static creditCard(control: AbstractControl): ValidationErrors|null {
         return creditCardValidator(control);

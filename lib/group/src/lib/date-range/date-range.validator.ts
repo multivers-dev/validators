@@ -29,17 +29,16 @@ export const dateRangeValidator = (startFieldName: string,endFieldName: string )
 
     const startField = group.get(startFieldName) as FormControl<Date>;
     const endField = group.get(endFieldName) as FormControl<Date>;
-    console.log(!startField , startField.invalid, endField.invalid,  !endField)
     if (!startField || !endField || !startField.value || !endField.value || startField.invalid || endField.invalid ){
         return null;
     }
-    if ( !(startField.value instanceof Date) || !(endField.value instanceof Date)) {
-        return { dateRange: true };
-    }
-    console.log('invalid', startField.value, endField.value);
-
-
     const startDateValue = startField.value;
     const endDateValue = endField.value;
-    return startDateValue <= endDateValue ? null : { dateRange: true };
+    // group.get(endFieldName)?.setErrors({ dateRange: true });
+    if( startDateValue <= endDateValue ) {
+        return null;
+    }else{
+        // group.get(endFieldName)?.setErrors({ dateRange: true });
+        return { dateRange: true };
+    }
 };

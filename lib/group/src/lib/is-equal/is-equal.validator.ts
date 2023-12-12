@@ -37,6 +37,6 @@ export const isEqualValidator = (firstField: string, secondField: string) => (gr
     if (firstValue === secondValue) {
         return null;
     }
-
+    //set error on all fields
     return { equal: true };
 };

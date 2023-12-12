@@ -1,88 +1,258 @@
-<div class="container">
-  <h1>Validators</h1>
-  <form [formGroup]="formGroup">
-    <pre>{{formGroup.errors | json }} </pre>
-    <pre>{{formGroup.invalid | json }} </pre>
+<div class="wrapper">
+    <div class="container">
+        <h1>Test Validators</h1>
 
-    <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="firstName" placeholder="First Name" formControlName="firstName">
-        <pre>{{firstName.errors | json }}</pre>
+        <form (submit)="formGroup.valid && submitForm()" [formGroup]="formGroup">
+            <div class="form-error" *ngIf="formGroup.errors">
+              <span>
+                  {{formGroup.errors | json}}
+                </span>
+            </div>
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title">Personal Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label for="firstName">First Name</label>
+                            <input [ngClass]="invalidField('firstName')" formControlName="firstName" id="firstName"
+                                   placeholder="Enter your First name" type="text">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('firstName', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="lastName">Last Name</label>
+                            <input [ngClass]="invalidField('lastName')" formControlName="lastName" id="lastName"
+                                   placeholder="Enter your Last name" type="text">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('lastName', 'hasLowerCase')">
+                                        {{errorMessages['hasLowerCase']}}
+                                </span>
+                                <span *ngIf="getErrorMessage('lastName', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                                <span *ngIf="getErrorMessage('lastName', 'hasUpperCase')">
+                                        {{errorMessages['hasUpperCase']}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="birthDate">Date of Birth</label>
+                            <input [ngClass]="invalidField('birthDate')" formControlName="birthDate" id="birthDate"
+                                   placeholder="Enter birth date" type="date">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('birthDate', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                                <span *ngIf="getErrorMessage('birthDate', 'date')">
+                                       Date must be in 1990, 0, 1 and 2000, 0, 1
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="email">Email</label>
+                            <input [ngClass]="invalidField('email')" formControlName="email" id="email" placeholder="Enter your email"
+                                   type="email">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('email', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                                <span *ngIf="getErrorMessage('email', 'email')">
+                                        {{errorMessages['email']}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="phoneNumber">Mobile Number</label>
+                            <input [ngClass]="invalidField('phoneNumber')" formControlName="phoneNumber"
+                                   id="phoneNumber" placeholder="Enter mobile number" type="tel">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('phoneNumber', 'phoneNumber')">
+                                        {{errorMessages['phoneNumber']}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="gender">Gender</label>
+                            <select [ngClass]="invalidField('gender')" formControlName="gender" id="gender">
+                                <option disabled selected>Select gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Others</option>
+                            </select>
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('gender', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            <label for="website">Website</label>
+                            <input [ngClass]="invalidField('website')" formControlName="website" id="website" placeholder="Enter your website"
+                                   type="url">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('website', 'url')">
+                                        {{errorMessages['url']}}
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="input-field">
+                            <label for="password">Password</label>
+                            <input [ngClass]="invalidField('password')" formControlName="password" id="password"
+                                   placeholder="Enter your password" type="password">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('password', 'hasLowerCase')">
+                                        {{errorMessages['hasLowerCase']}}
+                                </span>
+                                <span *ngIf="getErrorMessage('password', 'hasUpperCase')">
+                                        {{errorMessages['hasUpperCase']}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="confirmedPassword">Confirmed Password</label>
+                            <input [ngClass]="invalidField('confirmPassword')" formControlName="confirmPassword"
+                                   id="confirmedPassword" placeholder="Confirme your password" type="password">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="details ID">
+                    <span class="title">User Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label for="idType">ID Type</label>
+                            <input [ngClass]="invalidField('idType')" formControlName="idType" id="idType" placeholder="Enter ID type"
+                                   type="text">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('idType', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="idNumber">ID Number</label>
+                            <input [ngClass]="invalidField('idNumber')" formControlName="idNumber" id="idNumber"
+                                   placeholder="Enter ID number" type="number">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('idNumber', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="issuedAuthority">Issued Authority</label>
+                            <input [ngClass]="invalidField('issuedAuthority')" formControlName="issuedAuthority"
+                                   id="issuedAuthority" placeholder="Enter issued authority" type="text">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('issuedAuthority', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="issueState">Issued State</label>
+                            <input [ngClass]="invalidField('issueState')" formControlName="issueState" id="issueState"
+                                   placeholder="Enter issued state" type="text">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('issueState', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="issueDate">Issued Date</label>
+                            <input [ngClass]="invalidField('issueDate')" formControlName="issueDate" id="issueDate"
+                                   placeholder="Enter your issued date" type="date">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('issueDate', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="input-field">
+                            <label for="expiryDate">Expiry Date</label>
+                            <input [ngClass]="invalidField('expiryDate')" formControlName="expiryDate" id="expiryDate"
+                                   placeholder="Enter expiry date" type="date">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('expiryDate', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <span class="title">Payment Informations</span>
+
+                    <div class="fields">
+
+                        <div class="input-field">
+                            <label for="accountNumber">Account Number</label>
+                            <input [ngClass]="invalidField('accountNumber')" formControlName="accountNumber"
+                                   id="accountNumber" placeholder="Enter Account Number" type="text">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('accountNumber', 'creditCard')">
+                                        {{errorMessages['creditCard']}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="expirationDate">Expiry Date</label>
+                            <input [ngClass]="invalidField('expirationDate')" formControlName="expirationDate"
+                                   id="expirationDate" placeholder="Enter your issued date" type="date">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('expirationDate', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="input-field">
+                            <label for="cvv">CVV</label>
+                            <input [ngClass]="invalidField('cvv')" formControlName="cvv" id="cvv" placeholder="Enter expiry date"
+                                   type="number">
+                            <div class="form-error">
+                                <span *ngIf="getErrorMessage('cvv', 'required')">
+                                        {{errorMessages['required']}}
+                                </span>
+                                <span *ngIf="getErrorMessage('cvv', 'range')">
+                                        CVV must be between 3 and 4 digits
+                                </span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <button  [disabled]="!formGroup.invalid" class="nextBtn" type="submit">
+                        <span class="btnText">Submit</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                </div>
+            </div>
+
+        </form>
     </div>
-
-    <div class="form-group">
-        <label for="lastName">Last Name</label>
-        <input type="text" class="form-control" id="lastName" placeholder="Last Name" formControlName="lastName">
-        <pre>{{lastName.errors | json }}</pre>
-    </div>
-
-      <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Last Name" formControlName="lastName">
-          <pre>{{password.errors | json }}</pre>
-      </div>
-
-        <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Last Name" formControlName="lastName">
-            <pre>{{confirmPassword.errors | json }}</pre>
-        </div>
-
-<div class="form-group">
-        <label for="birthDate">Birth Date</label>
-        <input type="date" class="form-control" id="birthDate" placeholder="Birth Date" formControlName="birthDate">
-        <pre>{{birthDate.errors | json }}</pre>
-    </div>
-
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" placeholder="Email" formControlName="email">
-            <pre>{{email.errors | json }}</pre>
-        </div>
-
-
-        <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="tel" class="form-control" id="phone" placeholder="Phone" formControlName="phone">
-            <pre>{{phoneNumber.errors | json }}</pre>
-
-        </div>
-
-        <div class="form-group">
-            <label for="creditCard">Credit Card</label>
-            <input type="text" class="form-control" id="creditCard" placeholder="Credit Card" formControlName="creditCard">
-            <pre>{{creditCard.errors | json }}</pre>
-        </div>
-
-
-        <div class="form-group">
-            <label for="website">Website</label>
-            <input type="text" class="form-control" id="website" placeholder="Website" formControlName="website">
-            <pre>{{website.errors | json }}</pre>
-        </div>
-
-
-
-<!--        <div class="form-group">-->
-<!--            <label for="ipAddress">IP Address</label>-->
-<!--            <input type="text" class="form-control" id="ipAddress" placeholder="IP Address" formControlName="ipAddress">-->
-<!--            <pre>{{ipAddress.errors | json }}</pre>-->
-<!--        </div>-->
-
-
-        <div class="form-group">
-            <label for="photo">Photo</label>
-            <input type="file" class="form-control" id="photo" placeholder="Photo" formControlName="photo">
-            <pre>{{photo.errors | json }}</pre>
-        </div>
-
-
-
-    <button [disabled]="formGroup.invalid" type="submit" class="btn btn-default">Submit</button>
-
-
-
-
-  </form>
-  
 </div>

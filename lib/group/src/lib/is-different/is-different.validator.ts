@@ -26,7 +26,6 @@ export const isDifferentValidator = (firstField: string, secondField: string) =>
 
     const first = group.get(firstField) as FormControl<any>;
     const second = group.get(secondField) as FormControl<any>;
-
     if (!first || !second  || first.invalid || second.invalid ) {
         return null;
     }
