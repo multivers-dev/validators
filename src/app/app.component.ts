@@ -21,7 +21,8 @@ export class AppComponent {
             firstName: new FormControl('', []),
             lastName: new FormControl('', Validators.compose([ MultiversControlValidators.lowerCase, MultiversControlValidators.upperCase])),
             birthDate: new FormControl('', Validators.compose([
-                Validators.required, MultiversControlValidators.date(
+                Validators.required,
+                MultiversControlValidators.date(
                     new Date(1990, 0, 1),
                     new Date(2000, 0, 1)
                     ),
@@ -29,11 +30,12 @@ export class AppComponent {
             email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
             phoneNumber: new FormControl('', [MultiversControlValidators.phoneNumber]),
             gender: new FormControl('', [Validators.required]),
-            occupation: new FormControl('', [Validators.required]),
             website: new FormControl('', [MultiversControlValidators.url]),
-            address: new FormControl('', ),
+           //Account Details
+           password: new FormControl('', [MultiversControlValidators.lowerCase, MultiversControlValidators.upperCase]),
+           confirmPassword: new FormControl('', [MultiversControlValidators.lowerCase, MultiversControlValidators.upperCase]),
 
-            //Identity Details
+           //Identity Details
             idType: new FormControl('', [Validators.required]),
             idNumber: new FormControl('', [Validators.required]),
             issuedAuthority: new FormControl('', [Validators.required]),
@@ -41,10 +43,7 @@ export class AppComponent {
             issueDate: new FormControl('', [Validators.required]),
             expiryDate: new FormControl('', [Validators.required]),
 
-            //Account Details
-            password: new FormControl('', [MultiversControlValidators.lowerCase, MultiversControlValidators.upperCase]),
-            confirmPassword: new FormControl('', []),
-            //payment Details
+          //payment Details
             accountNumber: new FormControl('', [MultiversControlValidators.creditCard]),
             expirationDate: new FormControl('', [Validators.required]),
             cvv: new FormControl('', [
@@ -67,17 +66,26 @@ export class AppComponent {
         console.log(this.formGroup.value)
     }
 
-    getErrorMessage(controlName: string, errorName: string) {
+    getErrorMessage(controlName: string, errorName: string | string[]) :boolean {
         const control: AbstractControl<any> = this.formGroup.controls[controlName];
-        if(control.hasError(errorName) && (control.dirty || control.touched)) {
-            return control.getError(errorName) ?? true;
+
+       const listError = Array.isArray(errorName) ? errorName : [errorName];
+
+        if (control && control.errors) {
+            for (const error of listError) {
+                if(control.hasError(error) && (control.dirty || control.touched)) {
+                    return control.getError(error) ?? true;
+                }
+            }
         }
+
+
         return false;
     }
 
     invalidField(controlName: string) {
         const control: AbstractControl<any> = this.formGroup.controls[controlName] ;
-        return control.invalid && (control.dirty || control.touched) && control.errors ? 'invalid' : '';
+        return control.invalid && (control.dirty || control.touched) && control.errors ? 'invalid' : 'valid';
     }
 
     errorMessages = {
@@ -93,4 +101,6 @@ export class AppComponent {
         notContains: 'Enter a valid value',
         notContainsField: 'Enter a valid value',
     }
+
+
 }

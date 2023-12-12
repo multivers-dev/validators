@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors } from "@angular/forms";
+import {AbstractControl, FormControl, ValidationErrors} from "@angular/forms";
 
 /**
  * dateValidator
@@ -9,13 +9,14 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
  * @param max - The maximum date
  */
 export const dateValidator = (min:Date|null=null, max:Date|null=null)  =>  (control: AbstractControl): ValidationErrors | null => {
-    if(!( control.value instanceof Date )) {
-        return { date: true };
+    if (!control || !control.value) {
+        return null;
     }
-    if(min && control.value < min) {
+    const date = new Date(control.value);
+    if(min && date < min) {
         return { minDate: true };
     }
-    if(max && control.value > max) {
+    if(max && date > max) {
         return { maxDate: true };
     }
     return null;

@@ -2,7 +2,7 @@
     <div class="container">
         <h1>Test Validators</h1>
 
-        <form (submit)="formGroup.valid && submitForm()" [formGroup]="formGroup">
+        <form (submit)="submitForm()" [formGroup]="formGroup">
             <div class="form-error" *ngIf="formGroup.errors">
               <span>
                   {{formGroup.errors | json}}
@@ -49,7 +49,7 @@
                                 <span *ngIf="getErrorMessage('birthDate', 'required')">
                                         {{errorMessages['required']}}
                                 </span>
-                                <span *ngIf="getErrorMessage('birthDate', 'date')">
+                                <span *ngIf="getErrorMessage('birthDate', ['minDate', 'maxDate'])">
                                        Date must be in 1990, 0, 1 and 2000, 0, 1
                                 </span>
                             </div>
@@ -243,14 +243,12 @@
                                 </span>
                             </div>
                         </div>
-
-
                     </div>
-                    <button  [disabled]="!formGroup.invalid" class="nextBtn" type="submit">
-                        <span class="btnText">Submit</span>
-                        <i class="uil uil-navigator"></i>
-                    </button>
+
                 </div>
+                <button  [disabled]="formGroup.invalid" class="nextBtn" type="submit">
+                    <span class="btnText">Submit</span>
+                </button>
             </div>
 
         </form>
