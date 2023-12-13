@@ -283,6 +283,6 @@ Project Link: [https://github.com/multivers-dev/validators](https://github.com/m
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[linkedin-url]: https://www.linkedin.com/company/multivers-dev/
 
 [product-screenshot]: src/assets/images/screenshot.png
