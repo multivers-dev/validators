@@ -28,7 +28,14 @@ import {phoneNumberValidator} from "./phone-number/phone-nomber.validation";
  */
 export class MultiversControlValidators{ 
 
-      static  date=(min:Date|null=null, max:Date|null=null) =>(control: AbstractControl): ValidationErrors|null => {
+      static  date=(
+          {
+                min,
+                max
+            }: {
+                min?: Date|null ;
+                max?: Date|null
+}) =>(control: AbstractControl): ValidationErrors|null => {
         return dateValidator(min,max)(control);
       }
 
@@ -69,12 +76,12 @@ export class MultiversControlValidators{
         return ipv6Validator(control)
       }
 
-      static range(min: number, max: number): ValidationErrors|null {
-        return rangeValidator(min, max);
+      static range = (min: number, max: number) =>(control:AbstractControl ): ValidationErrors|null => {
+        return rangeValidator(min, max)(control);
       }
 
-     static unique(values : any): ValidationErrors | null {
-        return uniqueValidator(values)
+     static unique = (values : any)  =>(control:AbstractControl ): ValidationErrors | null =>{
+        return uniqueValidator(values)(control);
       }
 
       static lowerCase(control: AbstractControl): ValidationErrors|null {

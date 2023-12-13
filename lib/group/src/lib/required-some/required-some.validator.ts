@@ -16,16 +16,16 @@ import { AbstractControl, ValidationErrors, FormGroup, FormControl } from '@angu
  *  ```
  *
  * @returns A validator function that returns an error with the `required` property if the validation check fails, otherwise `null`.
- * @param fieldList - The list of fields.
+ * @param fieldNameList
  * @param numberRequired - The number of fields that must be filled.
  */
-export const requiredSomeValidator = (fieldList : string[], numberRequired:number=1) => (group: AbstractControl): ValidationErrors | null => {
+export const requiredSomeValidator = (fieldNameList : string[], numberRequired:number=1) => (group: AbstractControl): ValidationErrors | null => {
     if (!(group instanceof FormGroup)) {
         console.warn('[requiredSomeValidator] should be used as FormGroup Validator');
         return null;
     }
 
-    const fields = fieldList.map(field => group.controls[field] as FormControl<any>);
+    const fields = fieldNameList.map(field => group.controls[field] as FormControl<any>);
     const invalidFields = fields.filter(field => !field);
     if (invalidFields.length > 0) {
         console.warn('[requiredSomeValidator] should be used with valid fields');
@@ -50,6 +50,6 @@ export const requiredSomeValidator = (fieldList : string[], numberRequired:numbe
         return null;
     }
     //set error on all fields
-    return { required: true, fields: fieldList, numberRequired: numberRequired };
+    return { required: true, fields: fieldNameList, numberRequired: numberRequired };
 
 };

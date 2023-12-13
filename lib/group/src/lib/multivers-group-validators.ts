@@ -4,6 +4,7 @@ import {requiredSomeValidator} from "./required-some/required-some.validator";
 import {dateRangeValidator} from "./date-range/date-range.validator";
 import {isEqualValidator} from "./is-equal/is-equal.validator";
 import {isDifferentValidator} from "./is-different/is-different.validator";
+import {requiredOneOfTwoValidator} from "./required-one-of-two/required-one-of-two.validator";
 
 /**
  * @description
@@ -21,6 +22,10 @@ export class MultiversGroupValidators {
         return notContainsValidator(control, fields)(formGroup);
     }
 
+    static requiredOnOfTwo = (firstField: string, secondField: string) => (formGroup: AbstractControl): ValidationErrors | null => {
+        return requiredOneOfTwoValidator(firstField, secondField)(formGroup);
+    }
+
     static requiredSome = (fieldList: string[], required: number = 1) => (formGroup: AbstractControl): ValidationErrors | null => {
         return requiredSomeValidator(fieldList, required)(formGroup);
     }
@@ -29,12 +34,12 @@ export class MultiversGroupValidators {
         return dateRangeValidator(from, to)(formGroup);
     }
 
-    static isDifferent = ( firstField: string,     secondField: string) => (formGroup: AbstractControl): ValidationErrors | null => {
+    static isDifferent = (firstField: string, secondField: string) => (formGroup: AbstractControl): ValidationErrors | null => {
         return isDifferentValidator(firstField, secondField)(formGroup);
     }
 
-    static isEquals = ( firstField: string, secondField: string) => (formGroup: AbstractControl): ValidationErrors | null => {
-        return isEqualValidator(firstField,secondField)(formGroup);
+    static isEquals = (firstField: string, secondField: string) => (formGroup: AbstractControl): ValidationErrors | null => {
+        return isEqualValidator(firstField, secondField)(formGroup);
     }
 
 }

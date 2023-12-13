@@ -1,7 +1,7 @@
 import { FormGroup, FormControl } from '@angular/forms';
-import { requiredSomeValidator } from './required-some.validator';
+import {MultiversGroupValidators} from "../multivers-group-validators";
 
-describe('requiredSomeValidator', () => {
+describe('MultiversGroupValidators.requiredSome', () => {
     let formGroup: FormGroup;
 
     beforeEach(() => {
@@ -9,16 +9,16 @@ describe('requiredSomeValidator', () => {
             field1: new FormControl('value1'),
             field2: new FormControl(''),
             field3: new FormControl('value3'),
-        }, requiredSomeValidator(['field1', 'field2', 'field3'], 1));
+        }, MultiversGroupValidators.requiredSome(['field1', 'field2', 'field3'], 1));
     });
 
     it('should return console for valid fields', () => {
         const spy = jest.spyOn(console, 'warn');
-        formGroup.addValidators(requiredSomeValidator(['field1', 'field2', 'field13'], 1));
+        formGroup.addValidators(MultiversGroupValidators.requiredSome(['field1', 'field2', 'field13'], 1));
         formGroup.updateValueAndValidity();
         expect(formGroup.errors).toBeNull();
         expect(spy).toHaveBeenCalled();
-        formGroup.addValidators(requiredSomeValidator(['field1', 'field2', 'field3'], 4));
+        formGroup.addValidators(MultiversGroupValidators.requiredSome(['field1', 'field2', 'field3'], 4));
         formGroup.updateValueAndValidity();
         // expect(spy).toHaveBeenCalled();
         expect(formGroup.errors).toBeNull();
@@ -32,7 +32,7 @@ describe('requiredSomeValidator', () => {
 
 
     it('should return null when form group is not an instance of FormGroup', () => {
-        const formControl = new FormControl('value', [requiredSomeValidator(['firstField', 'secondField'])]);
+        const formControl = new FormControl('value', [MultiversGroupValidators.requiredSome(['firstField', 'secondField'])]);
         expect(formControl.errors).toBeNull();
     });
 
@@ -43,17 +43,17 @@ describe('requiredSomeValidator', () => {
         formGroup.controls['field1'].setValue('');
         formGroup.controls['field3'].setValue('');
         expect(formGroup.valid).toBeFalsy();
-        expect(formGroup.errors).toEqual({ required: true });
+        expect(formGroup.errors).toEqual({ fields : ['field1', 'field2', 'field3'], "numberRequired": 1, required: true });
     });
 
 
     it('should handle less required fields', () => {
-        const validator = requiredSomeValidator(['field1', 'field2', 'field3'], 2);
+        const validator = MultiversGroupValidators.requiredSome(['field1', 'field2', 'field3'], 2);
         expect(validator(formGroup)).toBeNull();
     });
 
     it('should handle less than 1 required field', () => {
-        const validator = requiredSomeValidator(['field1', 'field2', 'field3'], 0);
+        const validator = MultiversGroupValidators.requiredSome(['field1', 'field2', 'field3'], 0);
         expect(validator(formGroup)).toBeNull();
     });
 });

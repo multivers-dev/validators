@@ -1,12 +1,11 @@
 import {FormControl} from "@angular/forms";
-import {uniqueValidator} from "./unique.validator";
 import {MultiversControlValidators} from "../multivers-control-validators";
 describe('UniqueValidator', () => {
 
     let formControl: FormControl<any>;
 
     beforeEach(() => {
-        formControl = new FormControl('', [uniqueValidator(['test'])]);
+        formControl = new FormControl('', [MultiversControlValidators.unique(['test'])]);
     });
 
     it('should be invalid with existing value', () => {

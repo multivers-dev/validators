@@ -1,44 +1,32 @@
 import { FormGroup, FormControl } from '@angular/forms';
-import {isDifferentValidator} from "./is-different.validator";
+import {MultiversGroupValidators} from "../multivers-group-validators";
 
 describe('DifferentValidator', () => {
+    let formGroup : FormGroup;
+
+    beforeEach(() => {
+        formGroup = new FormGroup({
+            firstField: new FormControl(''),
+            secondField: new FormControl(''),
+        }, MultiversGroupValidators.isDifferent('firstField', 'secondField'));
+    });
     it('should return validation error when fields are equal', () => {
-        const formGroup = new FormGroup({
-            firstField: new FormControl('value2'),
-            secondField: new FormControl('value2'),
-        });
-
-        const validatorFn = isDifferentValidator('firstField', 'secondField');
-        formGroup.setValidators(validatorFn);
-        formGroup.updateValueAndValidity();
-
+        formGroup.controls['firstField'].setValue('value2');
+        formGroup.controls['secondField'].setValue('value2');
         expect(formGroup.errors).toEqual({ different: true });
     });
 
     it('should return null when fields are different', () => {
-        const formGroup = new FormGroup({
-            firstField: new FormControl('value1'),
-            secondField: new FormControl('otherValue'),
-        });
-
-        const validatorFn = isDifferentValidator('firstField', 'secondField');
-        formGroup.setValidators(validatorFn);
-        formGroup.updateValueAndValidity();
-
+        formGroup.controls['firstField'].setValue('value1');
+        formGroup.controls['secondField'].setValue('otherValue');
         expect(formGroup.errors).toEqual(null);
     });
 
     it('should return null when either field is invalid', () => {
-        const formGroup = new FormGroup({
-            firstField: new FormControl('validValue'),
-            secondField: new FormControl({ value: 'invalidValue', disabled: true }),
-        });
 
-        const validatorFn = isDifferentValidator('firstField', 'secondField');
-        formGroup.setValidators(validatorFn);
-        formGroup.updateValueAndValidity();
-
-        // expect(formGroup.errors).toEqual({ different: true });
+        const validatorFn = MultiversGroupValidators.isDifferent('firstField', 'secondField');
+        formGroup.controls['firstField'].setValue('validValue');
+        formGroup.controls['secondField'].setValue( 'invalidValue');
         expect(formGroup.errors).toEqual(null);
     });
 
@@ -47,7 +35,7 @@ describe('DifferentValidator', () => {
             firstField: new FormControl('value1'),
         });
 
-        const validatorFn = isDifferentValidator('firstField', 'secondField');
+        const validatorFn = MultiversGroupValidators.isDifferent('firstField', 'secondField');
         formGroup.setValidators(validatorFn);
         formGroup.updateValueAndValidity();
 
@@ -57,7 +45,7 @@ describe('DifferentValidator', () => {
     it('should return null when form group is not an instance of FormGroup', () => {
         const formControl = new FormControl('value');
 
-        const validatorFn = isDifferentValidator('firstField', 'secondField');
+        const validatorFn = MultiversGroupValidators.isDifferent('firstField', 'secondField');
         const result = validatorFn(formControl);
 
         expect(result).toBeNull();

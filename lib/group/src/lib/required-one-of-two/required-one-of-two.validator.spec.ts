@@ -1,5 +1,5 @@
 import { FormGroup, FormControl } from '@angular/forms';
-import { requiredOneOfTwoValidator } from './required-one-of-two.validator';
+import {MultiversGroupValidators} from "../multivers-group-validators";
 
 describe('Required One of Two Validator', () => {
     it('should return validation error when both fields are empty', () => {
@@ -8,7 +8,7 @@ describe('Required One of Two Validator', () => {
             secondField: new FormControl(''),
         });
 
-        const validatorFn = requiredOneOfTwoValidator('firstField', 'secondField');
+        const validatorFn = MultiversGroupValidators.requiredOnOfTwo('firstField', 'secondField');
         formGroup.setValidators(validatorFn);
         formGroup.updateValueAndValidity();
 
@@ -21,7 +21,7 @@ describe('Required One of Two Validator', () => {
             secondField: new FormControl(''),
         });
 
-        const validatorFn = requiredOneOfTwoValidator('firstField', 'secondField');
+        const validatorFn = MultiversGroupValidators.requiredOnOfTwo('firstField', 'secondField');
         formGroup.setValidators(validatorFn);
         formGroup.updateValueAndValidity();
 
@@ -34,7 +34,7 @@ describe('Required One of Two Validator', () => {
             secondField: new FormControl('notEmpty'),
         });
 
-        const validatorFn = requiredOneOfTwoValidator('firstField', 'secondField');
+        const validatorFn = MultiversGroupValidators.requiredOnOfTwo('firstField', 'secondField');
         formGroup.setValidators(validatorFn);
         formGroup.updateValueAndValidity();
 
@@ -47,7 +47,7 @@ describe('Required One of Two Validator', () => {
             secondField: new FormControl('notEmpty2'),
         });
 
-        const validatorFn = requiredOneOfTwoValidator('firstField', 'secondField');
+        const validatorFn = MultiversGroupValidators.requiredOnOfTwo('firstField', 'secondField');
         formGroup.setValidators(validatorFn);
         formGroup.updateValueAndValidity();
 
@@ -60,7 +60,7 @@ describe('Required One of Two Validator', () => {
             secondField: new FormControl(''),
         });
 
-        const validatorFn = requiredOneOfTwoValidator('firstField', 'secondField');
+        const validatorFn = MultiversGroupValidators.requiredOnOfTwo('firstField', 'secondField');
         formGroup.setValidators(validatorFn);
         formGroup.updateValueAndValidity();
 
@@ -72,7 +72,7 @@ describe('Required One of Two Validator', () => {
             firstField: new FormControl('notEmpty'),
         });
 
-        const validatorFn = requiredOneOfTwoValidator('firstField', 'secondField');
+        const validatorFn = MultiversGroupValidators.requiredOnOfTwo('firstField', 'secondField');
         formGroup.setValidators(validatorFn);
         formGroup.updateValueAndValidity();
 
@@ -82,7 +82,7 @@ describe('Required One of Two Validator', () => {
     it('should return null when form group is not an instance of FormGroup', () => {
         const spyObj = jest.spyOn(console, 'warn')
 
-        const formControl = new FormControl('value', [requiredOneOfTwoValidator('firstField', 'secondField')]);
+        const formControl = new FormControl('value', [MultiversGroupValidators.requiredOnOfTwo('firstField', 'secondField')]);
 
         expect(formControl.errors).toBeNull();
         expect(spyObj).toHaveBeenCalledTimes(1);

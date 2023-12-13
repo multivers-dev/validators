@@ -2,7 +2,7 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
 
 /**
  * fileTypeValidator
- * Validates that the value is a file with an allowed file type.
+ * Validates that the value is a file with an allowed file type .
  *
  *  @param allowedTypes - The allowed file types.
  *  @returns ValidationErrors or null if the validation passes.

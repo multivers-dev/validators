@@ -23,8 +23,10 @@ export class AppComponent {
             birthDate: new FormControl('', Validators.compose([
                 Validators.required,
                 MultiversControlValidators.date(
-                    new Date(1990, 0, 1),
-                    new Date(2000, 0, 1)
+                    {
+                       min: new Date(1990, 0, 1),
+                      max:  new Date(2000, 0, 1)
+                    },
                     ),
             ])),
             email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
