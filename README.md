@@ -1,11 +1,16 @@
 <a name="readme-top"></a>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[//]: # ([![Contributors][contributors-shield]][contributors-url])
+
+[//]: # ([![Forks][forks-shield]][forks-url])
+
+[//]: # ([![Stargazers][stars-shield]][stars-url])
+
+[//]: # ([![Issues][issues-shield]][issues-url])
+
+[//]: # ([![MIT License][license-shield]][license-url])
+
+[//]: # ([![LinkedIn][linkedin-shield]][linkedin-url])
 
 
 
@@ -19,7 +24,8 @@
 <h3 align="center">Multivers Validators</h3>
 
   <p align="center">
-    A collection of validators for Angular Reactive Forms.
+    A collection of validators for Angular Reactive Forms. This library is dependent on Angular and RxJS.
+  
     <br /> <br/>
     <a href="https://github.com/multivers-dev/validators"><strong>Explore the docs »</strong></a>
     <br />
@@ -39,16 +45,8 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#installation">Installation</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
@@ -81,20 +79,9 @@ Here's why:
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-<!-- GETTING STARTED -->
+<!-- Installation -->
 
-## Getting Started
-
-
-### Prerequisites
-
-_Below is what is needed to use the library._
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
+## Installation
 
 _Below is how to install the library and use it in your project._
 
@@ -104,28 +91,33 @@ _Below is how to install the library and use it in your project._
    npm install @multivers/validators
 ```
 
-2. Import the `MultiversValidatorsModule` into your Angular module:
+Import the `MultiversControlValidator` or  `MultiversGroupValidator`lib into your component: 
+
 
 ```typescript
-import { MultiversValidatorsModule } from '@multivers/validators';
-
-@NgModule({
-  imports: [
-    MultiversValidatorsModule,
-  ],
-})
-
-export class AppModule { }
+import { MultiversControlValidator } from 'multivers-validators';
+import { MultiversGroupValidator } from 'multivers-validators';
 ```
 
-3. Then, add the validators to your form controls:
+Then, add the validators to your form controls:
 
 ```typescript
-formGroup = new FormGroup({
-  firstField: new FormControl('', [someValidatorOfThisLibrary, anotherValidatorOfThisLibrary, ...]),
-  secondField: new FormControl('', [someValidatorOfThisLibrary, anotherValidatorOfThisLibrary, ...]),
-  thirdField: new FormControl('', [someValidatorOfThisLibrary, anotherValidatorOfThisLibrary, ...]),
-  fourthField: new FormControl('', [someValidatorOfThisLibrary, anotherValidatorOfThisLibrary, ...]),
+ this.formGroup =  new FormGroup({
+  //Personal Details
+  firstName: new FormControl('', []),
+  lastName: new FormControl('', Validators.compose([ MultiversControlValidators.lowerCase, MultiversControlValidators.upperCase])),
+  birthDate: new FormControl('', Validators.compose([
+    Validators.required,
+    MultiversControlValidators.date({min: new Date(1990, 0, 1), max:  new Date(2000, 0, 1)}),
+  ]),
+  )}, {
+  validators: [
+    MultiversGroupValidators.notContains('password', ['firstName', 'lastName']),
+    MultiversGroupValidators.requiredSome(['firstName', 'lastName'], 1),
+    MultiversGroupValidators.dateRange('issueDate', 'expiryDate'),
+    MultiversGroupValidators.isDifferent('firstName', 'lastName'),
+    MultiversGroupValidators.isEquals('password', 'confirmPassword'),
+  ]
 });
 ```
 
@@ -146,6 +138,8 @@ arguments.
 
 ###  Control Validators
 
+_See the Control Validators [Documentation](lib/control/README.md)_
+
 | Control Validator                                    | Description                                                                                                                                                        |
 |------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `credit-card`                                        | The `credit-card` validator checks if the input is a valid credit card number. It uses `the Luhn algorithm` to validate the number.                                |
@@ -165,6 +159,8 @@ arguments.
 | `url`                                                | The `url` validator checks if the input is a valid URL. It supports both http and https protocols.                                                                 |
 
 ### Group Validators
+
+_See the Group Validators [Documentation](lib/group/README.md)_
 
 | Group Validator                                                        | Description                                                                                                                                                                                                 |
 |------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -188,7 +184,6 @@ arguments.
 - [x] Add back to top links
 - [x] Add a lib for forms controls
 - [x] Add a lib for forms group validators
-- [ ] Add a lib for forms errors messages
 - [ ] Add Github pages for documentation
 - [ ] Multi-language Support
     - [ ] French
