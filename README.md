@@ -24,8 +24,7 @@
 <h3 align="center">Multivers Validators</h3>
 
   <p align="center">
-    A collection of validators for Angular Reactive Forms. This library is dependent on Angular and RxJS.
-  
+    A collection of validators for Angular Reactive Forms. This library is dependent on Angular and RxJS only.
     <br /> <br/>
     <a href="https://github.com/multivers-dev/validators"><strong>Explore the docs »</strong></a>
     <br />
@@ -87,9 +86,18 @@ _Below is how to install the library and use it in your project._
 
 1. Install the library
 
-```sh
+```sh npm
    npm install @multivers/validators
 ```
+
+```shell
+  yarn add @multivers/validators
+```
+
+```shell
+  pnpm add @multivers/validators
+```
+
 
 Import the `MultiversControlValidator` or  `MultiversGroupValidator`lib into your component: 
 
