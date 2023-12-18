@@ -2,17 +2,20 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
 
 /**
  * lowerCaseValidator
- * @returns
+ * Validates that the value has at least one lower case character.
+ *
+ * @param control - The AbstractControl to validate.
+ * @returns ValidationErrors or null if the validation passes.
  */
 export const lowerCaseValidator = (control: AbstractControl): ValidationErrors | null => {
-    const value = control.value;
+    const value = control.value ;
     if (!value) {
       return null;
     }
     const hasLowerCase = /[a-z]+/.test(value);
     if (hasLowerCase){
-      return { hasLowerCase: true }
+      return null
     }
-    return null;
+    return { hasLowerCase: true }
   };
 
