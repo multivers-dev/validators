@@ -15,8 +15,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci
-      - run: npm test
+      - run: npm install pnpm -g && pnpm install
+      - run: pnpm run test
 
   publish-npm:
     needs: build
