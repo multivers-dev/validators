@@ -2,8 +2,8 @@ name: Release & Deploy Workflow
 
 on:
   pull_request:
-#    tags:
-#      - 'publish/*'
+    tags:
+      - 'publish/*'
 
 jobs:
   build:
