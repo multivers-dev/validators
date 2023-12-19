@@ -1,5 +1,5 @@
 {
-  "name": "validators",
+  "name": "@multivers/validators",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
