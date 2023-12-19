@@ -30,6 +30,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+          scope: '@octocat'
       - run: npm install pnpm -g && pnpm install
       - run: npm whoami
       - run: npm publish --access public
