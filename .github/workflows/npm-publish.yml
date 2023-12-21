@@ -4,11 +4,8 @@
 name: Node.js Package
 
 on:
-#  release:
-#    types: [created]
-    push:
-        branches:
-        - 01_control_validators
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -31,7 +28,7 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
           scope: '@octocat'
-      - run: npm install pnpm -g && pnpm install
-      - run: npm publish --access public
+      - run: npm install pnpm -g && pnpm install && pnpm build
+      - run: npm publish --access public ./dist/lib
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
