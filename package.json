@@ -5,6 +5,7 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build validators",
+    "build:validators-tests": "nx run validators:build:validators-tests",
     "test": "nx test validators --coverage"
   },
   "private": false,
