@@ -29,7 +29,7 @@
     <a href="https://github.com/multivers-dev/validators"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/multivers-dev/validators">View Demo</a>
+    <a href="https://multivers-dev.github.io/validators/">View Demo</a>
     ·
     <a href="https://github.com/multivers-dev/validators/issues">Report Bug</a>
     ·
@@ -239,7 +239,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Pierre Nédélec - [@your_twitter](https://twitter.com/your_username) - contact@multivers.dev
+Pierre Nédélec - [contact@multivers.dev](mailto:contact@multivers.dev)
 
 Project Link: [https://github.com/multivers-dev/validators](https://github.com/multivers-dev/validators)
 
