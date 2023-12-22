@@ -1,10 +1,16 @@
 {
   "name": "@multivers/validators",
+  "description": "A collection of validators for Angular Reactive Forms. This library is dependent on Angular only",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/multivers-dev/validators/issues"
+  },
+  "homepage": "https://multivers-dev.github.io/validators/",
   "repository": {
     "type": "git",
     "url": "https://github.com/multivers-dev/validators.git"
   },
-  "version": "0.0.1.beta.0",
+  "version": "0.0.2",
   "peerDependencies": {
     "@angular/common": ">=16.2.0",
     "@angular/core": ">=16.2.0"
@@ -16,6 +22,12 @@
   "keywords": [
     "angular",
     "validators",
-    "multivers"
+    "validate",
+    "validation",
+    "Forms",
+    "FormBuilder",
+    "FormGroup",
+    "FormControl",
+    "multivers-dev"
   ]
 }
